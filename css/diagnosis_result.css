@@ -108,3 +108,23 @@ body {
     justify-content: center;
     padding-bottom: 4rem;
 }
+
+.ai {
+    background: linear-gradient(45deg, #fcd253, #f7b733);
+    color: #5e4406;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin: 2rem auto;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.ai:hover {
+    background: linear-gradient(45deg, #ffe17f, #ffd14d);
+    transform: scale(1.05);
+}
