@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lamp LP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              rounded: ["'M PLUS Rounded 1c'", "sans-serif"],
+              aladdin: ["'Aladdin'", "cursive"],
+            },
+            keyframes: {
+              fadein: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "3", transform: "translateY(0)" },
+              },
+            },
+            animation: {
+              fadein: "fadein 1s ease-out forwards",
+              fadeinSlow: "fadein 3s ease-out forwards",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      @font-face {
+        font-family: "Aladdin";
+        src: url("./fonts/Aladdin.ttf") format("truetype");
+      }
+    </style>
+  </head>
+  <header
+    class="sticky top-0 w-full flex justify-between items-center px-8 h-16 bg-[#1a1a40] text-yellow-300 text-xl font-rounded z-50"
+  >
+    <div>
+      <nav class="flex gap-4">
+        <a href="#TOP">TOP</a>
+        <a href="#features">Lampとは？</a>
+        <a href="#target">こんな人におすすめ</a>
+        <a href="#cta">診断</a>
+      </nav>
+    </div>
+  </header>
+  <body
+    class="m-0 flex flex-col opacity-0 animate-fadein duration-2000 mx-auto"
+  >
+    <section
+      id="TOP"
+      class="aspect-[3/2] bg-cover bg-center flex justify-center items-center"
+      style="background-image: url('./img/lamp_lp_hero.png')"
+    >
+      <h1
+        class="text-9xl text-yellow-300 opacity-0 animate-fadein duration-2000"
+        style="font-family: 'Aladdin', cursive"
+      >
+        Lamp
+      </h1>
+    </section>
+
+    <section id="features" class="flex min-h-[500px] py-12 bg-[#2a2a4f]">
+      <div
+        class="w-1/2 bg-[url('./img/lamp_lp_features.png')] bg-cover bg-center"
+      ></div>
+      <div class="w-1/2 bg-[#2a2a4f] flex flex-col justify-center items-center">
+        <h2 class="text-yellow-300 text-3xl font-rounded">
+          <span class="font-aladdin text-7xl">Lamp</span>とは？
+        </h2>
+        <p class="text-yellow-300 text-xl text-center leading-relaxed pt-24">
+          アラジンがランプに触れた時、<br />
+          本当の願いに気づいたように。<br />
+          <span class="font-aladdin text-3xl">Lamp</span>は、あなたの<br />
+          “まだ言葉になっていない願い”を照らします。
+        </p>
+      </div>
+    </section>
+
+    <section id="target" class="bg-[#1a1a40] py-8 px-6">
+      <div>
+        <h2 class="text-3xl text-center text-yellow-300 font-rounded mb-8">
+          こんな人におすすめ
+        </h2>
+      </div>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center text-yellow-100 font-rounded"
+      >
+        <div class="bg-[#2a2a4f] p-8 rounded-lg shadow-lg">
+          採用後の定着率・活躍度を高めたい
+        </div>
+        <div class="bg-[#2a2a4f] p-8 rounded-lg shadow-lg">
+          表面的な志望動機に頼らない選考をしたい
+        </div>
+        <div class="bg-[#2a2a4f] p-8 rounded-lg shadow-lg">
+          自社の価値観や文化に共鳴する人材を見極めたい
+        </div>
+        <div class="bg-[#2a2a4f] p-8 rounded-lg shadow-lg">
+          “マッチング”を超えて“共創”できる仲間と出会いたい
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="cta"
+      class="bg-yellow-300 text-[#1a1a40] text-center py-16 px-6"
+    >
+      <h2 class="text-2xl font-rounded mb-6">
+        あなたの<span class="font-aladdin text-4xl">Lamp</span
+        >を、見つけませんか？
+      </h2>
+      <p class="text-lg mb-8 font-rounded">
+        まだ言葉になっていない「願い」が、きっとそこにある。
+      </p>
+      <a
+        href="#TOP"
+        class="inline-block bg-[#1a1a40] text-yellow-300 px-8 py-3 rounded-full font-rounded hover:bg-black transition"
+      >
+        今すぐ診断してみる
+      </a>
+    </section>
+
+    <footer
+      class="flex justify-center items-center bg-[#1a1a40] text-yellow-300 py-8 px-4 text-sm text-xs"
+    >
+      &copy; 2025 Genie Inc. All rights reserved.
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400&family=Varela+Round&display=swap');
+
+body {
+    background-image: url(../img/cave.png);
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+section.bg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* スクロール時にパララックスっぽく */
+    color: white;
+    padding: 100px 20px;
+    /* 中の質問分の余白 */
+    min-height: 100vh;
+}
+
+/* 各Layerに対応する背景画像 */
+.layer1 {
+    background-image: url('../img/layer1.png');
+}
+
+.layer2 {
+    background-image: url('../img/layer2.png');
+}
+
+.layer3 {
+    background-image: url('../img/layer3.png');
+}
+
+.layer4 {
+    background-image: url('../img/layer4.png');
+}
+
+.question {
+    margin: 4rem auto;
+    padding: 2rem;
+    max-width: 720px;
+    background-color: rgba(26, 26, 64, 0.6);
+    backdrop-filter: blur(2px);
+    border-radius: 1rem;
+    color: rgba(250, 204, 21);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}	
+
+.question p {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+#end-diagnosis {
+    background: linear-gradient(45deg, #fcd253, #f7b733);
+    color: #5e4406;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    margin: 2rem auto;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+#end-diagnosis:hover {
+    background: linear-gradient(45deg, #ffe17f, #ffd14d);
+    transform: scale(1.05);
+}
