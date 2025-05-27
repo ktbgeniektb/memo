@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400&family=Varela+Round&display=swap');
 
 body {
-    background-image: url(../img/cave.png);
+    background-image: url(../img/cave.jpglayer1.jpg);
     font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
@@ -17,22 +17,47 @@ section.bg {
     min-height: 100vh;
 }
 
-/* 各Layerに対応する背景画像 */
 .layer1 {
-    background-image: url('../img/layer1.png');
+    background-image: image-set(url('../img/layer1.jpg') 1x,
+            url('../img/highres/layer1@2x.jpg') 2x,
+            url('../img/highres/layer1@3x.jpg') 3x);
 }
 
 .layer2 {
-    background-image: url('../img/layer2.png');
+    background-image: image-set(url('../img/layer2.jpg') 1x,
+            url('../img/highres/layer2@2x.jpg') 2x,
+            url('../img/highres/layer2@3x.jpg') 3x);
 }
 
 .layer3 {
-    background-image: url('../img/layer3.png');
+    background-image: image-set(url('../img/layer3.jpg') 1x,
+            url('../img/highres/layer3@2x.jpg') 2x,
+            url('../img/highres/layer3@3x.jpg') 3x);
 }
 
 .layer4 {
-    background-image: url('../img/layer4.png');
+    background-image: image-set(url('../img/layer4.jpg') 1x,
+            url('../img/highres/layer4@2x.jpg') 2x,
+            url('../img/highres/layer4@3x.jpg') 3x);
 }
+
+/* 各Layerに対応する背景画像 */
+.layer1 {
+    background-image: url('../img/layer1.jpg');
+}
+
+.layer2 {
+    background-image: url('../img/layer2.jpg');
+}
+
+.layer3 {
+    background-image: url('../img/layer3.jpg');
+}
+
+.layer4 {
+    background-image: url('../img/layer4.jpg');
+}
+
 
 .question {
     margin: 4rem auto;

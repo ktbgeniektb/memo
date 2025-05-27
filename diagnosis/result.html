@@ -20,7 +20,7 @@
     </section>
 
     <section class="chart">
-      <canvas id="result-chart" width="500" height="500"></canvas>
+      <canvas id="result-chart"></canvas>
     </section>
 
     <section class="result-section">
@@ -496,7 +496,7 @@
       const top2 = localStorage.getItem("top2");
       const key = [top1, top2].sort().join("_");
 
-      $("#top-image").attr("src", `../img/results/${key}.png`);
+      $("#top-image").attr("src", `../img/results/${key}.jpg`);
 
       // console.log(Object.keys(templates));
 
@@ -552,7 +552,8 @@
           ],
         },
         options: {
-          responsive: false,
+          responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               display: false, // ← これで凡例非表示
