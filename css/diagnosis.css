@@ -42,7 +42,7 @@ section.bg {
 }
 
 /* 各Layerに対応する背景画像 */
-.layer1 {
+/* .layer1 {
     background-image: url('../img/layer1.jpg');
 }
 
@@ -56,7 +56,7 @@ section.bg {
 
 .layer4 {
     background-image: url('../img/layer4.jpg');
-}
+} */
 
 
 .question {
@@ -94,4 +94,15 @@ section.bg {
 #end-diagnosis:hover {
     background: linear-gradient(45deg, #ffe17f, #ffd14d);
     transform: scale(1.05);
+}
+
+.bg-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
 }

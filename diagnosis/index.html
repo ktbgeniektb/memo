@@ -9,6 +9,7 @@
     <title>診断</title>
   </head>
   <body>
+    <img src="./img/highres/layer1@3x.jpg" class="bg-img" alt="背景" />
     <section class="bg layer1">
       <div class="question" data-index="0" data-category="共鳴型">
         <p>1. 自分は、誰かの言葉や行動に強く心を動かされることがある</p>
@@ -318,5 +319,19 @@
     } 
   });
     </script>
+    <script>
+  const bgImage = document.querySelector(".bg-img");
+  const layers = document.querySelectorAll("section.bg");
+
+  window.addEventListener("scroll", () => {
+    for (let i = layers.length - 1; i >= 0; i--) {
+      const rect = layers[i].getBoundingClientRect();
+      if (rect.top <= window.innerHeight / 2) {
+        bgImage.src = `./img/highres/layer${i + 1}@3x.jpg`;
+        break;
+      }
+    }
+  });
+</script>
   </body>
 </html>
