@@ -95,3 +95,50 @@ section.bg {
     background: linear-gradient(45deg, #ffe17f, #ffd14d);
     transform: scale(1.05);
 }
+
+@media screen and (max-width: 768px) {
+    .layer1 {
+        background-image: url('../img/layer1_sp.jpg') !important;
+        background-size: auto 100% !important;
+        background-position: center top !important;
+        background-attachment: scroll !important;
+    }
+
+    .layer2 {
+        background-image: url('../img/layer2_sp.jpg') !important;
+        background-size: auto 100% !important;
+        background-position: center top !important;
+        background-attachment: scroll !important;
+    }
+
+    .layer3 {
+        background-image: url('../img/layer3_sp.jpg') !important;
+        background-size: auto 100% !important;
+        background-position: center top !important;
+        background-attachment: scroll !important;
+    }
+
+    .layer4 {
+        background-image: url('../img/layer4_sp.jpg') !important;
+        background-size: auto 100% !important;
+        background-position: center top !important;
+        background-attachment: scroll !important;
+    }
+}
+
+#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+/* section.bg は元々の CSS 背景をクリア */
+section.bg {
+    background: none !important;
+}

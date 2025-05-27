@@ -9,7 +9,12 @@
     <title>診断</title>
   </head>
   <body>
-    <section class="bg layer1">
+    <div id="bg"></div>
+    <section
+      class="bg layer1"
+      data-bg="./../img/layer1.jpg"
+      data-bg-sp="./../img/layer1_sp.jpg"
+    >
       <div class="question" data-index="0" data-category="共鳴型">
         <p>1. 自分は、誰かの言葉や行動に強く心を動かされることがある</p>
         <div class="choices"></div>
@@ -60,7 +65,11 @@
         ></div>
       </div>
     </section>
-    <section class="bg layer2">
+    <section
+      class="bg layer2"
+      data-bg="./../img/layer2.jpg"
+      data-bg-sp="./../img/layer2_sp.jpg"
+    >
       <div class="question" data-index="5" data-category="共鳴型">
         <p>6. ひとの「想い」や「こだわり」を知ると、応援したくなる</p>
         <div class="choices"></div>
@@ -116,7 +125,11 @@
         ></div>
       </div>
     </section>
-    <section class="bg layer3">
+    <section
+      class="bg layer3"
+      data-bg="./../img/layer3.jpg"
+      data-bg-sp="./../img/layer3_sp.jpg"
+    >
       <div class="question" data-index="10" data-category="共鳴型">
         <p>11. 誰かの熱い想いを聞くと、自分も心を動かされる</p>
         <div class="choices"></div>
@@ -167,7 +180,11 @@
         ></div>
       </div>
     </section>
-    <section class="bg layer4">
+    <section
+      class="bg layer4"
+      data-bg="./../img/layer4.jpg"
+      data-bg-sp="./../img/layer4_sp.jpg"
+    >
       <div class="question" data-index="15" data-category="探究型">
         <p>16. 自分だけが知ってる“深い世界”がある</p>
         <div class="choices"></div>
@@ -219,104 +236,133 @@
       </div>
       <button id="end-diagnosis" type="button">Lampを探しに行く</button>
     </section>
-  </body>
-  <script>
-        const choices = [
-          "まったくそう思わない",
-          "あまりそう思わない",
-          "どちらでもない",
-          "ややそう思う",
-          "とてもそう思う",
-        ];
+    <script>
+      const choices = [
+        "まったくそう思わない",
+        "あまりそう思わない",
+        "どちらでもない",
+        "ややそう思う",
+        "とてもそう思う",
+      ];
 
-        function showError(selector, message) {
-          $(selector).text(message).show();
-        }
+      function showError(selector, message) {
+        $(selector).text(message).show();
+      }
 
-        function clearError(selector) {
-          $(selector).text("").hide();
-        }
+      function clearError(selector) {
+        $(selector).text("").hide();
+      }
 
-        $(".question").each(function () {
-          const index = $(this).data("index");
-          const $choices = $(this).find(".choices");
+      $(".question").each(function () {
+        const index = $(this).data("index");
+        const $choices = $(this).find(".choices");
 
-          choices
-            .slice()
-            .reverse()
-            .forEach((label, i) => {
-              // <label><input type="radio" name="q0" value="1"> まったくそう思わない</label><br/>　の生成
+        choices
+          .slice()
+          .reverse()
+          .forEach((label, i) => {
+            // <label><input type="radio" name="q0" value="1"> まったくそう思わない</label><br/>　の生成
             const score = choices.length - i; // 最大が5になる
             const $label = $(
               `<label><input type="radio" name="q${index}" value="${score}"> ${label}</label><br/>`
             );
             $choices.append($label);
           });
+      });
+
+      $("#end-diagnosis").on("click", function () {
+        let isValid = true;
+
+        $(".question").each(function () {
+          const index = $(this).data("index");
+          const selected = $(`input[name="q${index}"]:checked`);
+          const $error = $(`#error-q${index}`);
+
+          if (selected.length === 0) {
+            $error.text("この質問に回答してください").show();
+            if (isValid) {
+              // 最初の未回答エラーにスクロール
+              $("html, body").animate(
+                { scrollTop: $(this).offset().top - 100 },
+                500
+              );
+            }
+            isValid = false;
+          } else {
+            $error.hide();
+          }
         });
 
-        $("#end-diagnosis").on("click", function () {
-          let isValid = true;
+        if (isValid == true) {
+          const scores = {
+            共鳴型: 0,
+            探究型: 0,
+            表現型: 0,
+            体験型: 0,
+            挑戦型: 0,
+          };
 
           $(".question").each(function () {
             const index = $(this).data("index");
-            const selected = $(`input[name="q${index}"]:checked`);
-            const $error = $(`#error-q${index}`);
-
-            if (selected.length === 0) {
-              $error.text("この質問に回答してください").show();
-              if (isValid) {
-                // 最初の未回答エラーにスクロール
-                $("html, body").animate(
-                  { scrollTop: $(this).offset().top - 100 },
-                  500
-                );
-              }
-              isValid = false;
-            } else {
-              $error.hide();
-            }
+            const category = $(this).data("category");
+            const value = parseInt($(`input[name="q${index}"]:checked`).val());
+            scores[category] += value;
           });
 
-    if (isValid == true) {
-      const scores = {
-        共鳴型: 0,
-        探究型: 0,
-        表現型: 0,
-        体験型: 0,
-        挑戦型: 0,
-      };
+          const typeMap = {
+            共鳴型: "kyomei",
+            探究型: "tankyu",
+            表現型: "hyougen",
+            体験型: "taiken",
+            挑戦型: "chosen",
+          };
 
-      $(".question").each(function () {
-        const index = $(this).data("index");
-        const category = $(this).data("category");
-        const value = parseInt($(`input[name="q${index}"]:checked`).val());
-        scores[category] += value;
+          //ここはGPTに頼った、中身理解必要
+          const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+          const top1 = sorted[0][0];
+          const top2 = sorted[1][0];
+
+          localStorage.setItem("top1", typeMap[top1]);
+          localStorage.setItem("top2", typeMap[top2]);
+
+          Object.entries(scores).forEach(([label, score]) => {
+            const key = typeMap[label];
+            localStorage.setItem(key, score);
+          });
+
+          window.location.href = "result.html";
+        }
       });
+    </script>
+    <script>
+      (function () {
+        const bgEl = document.getElementById("bg");
+        const secs = document.querySelectorAll("section.bg");
 
-      const typeMap = {
-        共鳴型: "kyomei",
-        探究型: "tankyu",
-        表現型: "hyougen",
-        体験型: "taiken",
-        挑戦型: "chosen",
-      };
+        function updateBg() {
+          const mid = window.innerHeight / 2;
+          let closest = secs[0],
+            minD = Infinity;
+          secs.forEach((s) => {
+            const r = s.getBoundingClientRect();
+            const d = Math.abs((r.top + r.bottom) / 2 - mid);
+            if (d < minD) {
+              minD = d;
+              closest = s;
+            }
+          });
+          const isSp = window.innerWidth <= 768;
+          const url =
+            isSp && closest.dataset.bgSp
+              ? closest.dataset.bgSp
+              : closest.dataset.bg;
+          bgEl.style.backgroundImage = `url('${url}')`;
+        }
 
-      //ここはGPTに頼った、中身理解必要
-      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-      const top1 = sorted[0][0];
-      const top2 = sorted[1][0];
-
-      localStorage.setItem("top1", typeMap[top1]);
-      localStorage.setItem("top2", typeMap[top2]);
-
-      Object.entries(scores).forEach(([label, score]) => {
-        const key = typeMap[label];
-        localStorage.setItem(key, score);
-      });
-
-      window.location.href = "result.html";
-    } 
-  });
+        window.addEventListener("scroll", updateBg);
+        window.addEventListener("resize", updateBg);
+        updateBg();
+      })();
     </script>
   </body>
 </html>
