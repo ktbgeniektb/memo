@@ -10,54 +10,38 @@ section.bg {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    /* スクロール時にパララックスっぽく */
     color: white;
     padding: 100px 20px;
-    /* 中の質問分の余白 */
     min-height: 100vh;
 }
 
 .layer1 {
+    background-attachment: fixed;
     background-image: image-set(url('../img/layer1.jpg') 1x,
             url('../img/highres/layer1@2x.jpg') 2x,
             url('../img/highres/layer1@3x.jpg') 3x);
 }
 
 .layer2 {
+    background-attachment: fixed;
     background-image: image-set(url('../img/layer2.jpg') 1x,
             url('../img/highres/layer2@2x.jpg') 2x,
             url('../img/highres/layer2@3x.jpg') 3x);
 }
 
 .layer3 {
+    background-attachment: fixed;
     background-image: image-set(url('../img/layer3.jpg') 1x,
             url('../img/highres/layer3@2x.jpg') 2x,
             url('../img/highres/layer3@3x.jpg') 3x);
 }
 
 .layer4 {
+    background-attachment: fixed;
     background-image: image-set(url('../img/layer4.jpg') 1x,
             url('../img/highres/layer4@2x.jpg') 2x,
             url('../img/highres/layer4@3x.jpg') 3x);
 }
-
-/* 各Layerに対応する背景画像 */
-.layer1 {
-    background-image: url('../img/layer1.jpg');
-}
-
-.layer2 {
-    background-image: url('../img/layer2.jpg');
-}
-
-.layer3 {
-    background-image: url('../img/layer3.jpg');
-}
-
-.layer4 {
-    background-image: url('../img/layer4.jpg');
-}
-
 
 .question {
     margin: 4rem auto;
@@ -124,21 +108,4 @@ section.bg {
         background-position: center top !important;
         background-attachment: scroll !important;
     }
-}
-
-#bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-}
-
-/* section.bg は元々の CSS 背景をクリア */
-section.bg {
-    background: none !important;
 }
