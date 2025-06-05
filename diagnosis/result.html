@@ -6,16 +6,21 @@
     <title>診断結果</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
     <link rel="stylesheet" href="./../css/diagnosis_result.css" />
   </head>
   <body>
     <section class="result-header">
       <div class="header-image-container">
         <img id="top-image" src="" alt="診断結果画像" />
-      </div>
-      <div class="header-text">
-        <h1 id="main-type" class="fade-up"></h1>
-        <p id="description" class="fade-up"></p>
+        <div class="result-overlay-text">
+          <div class="main-type-wrapper">
+            <h1 id="main-type"></h1>
+          </div>
+          <div class="description-wrapper">
+            <p id="description"></p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -494,7 +499,7 @@
 
       const top1 = localStorage.getItem("top1");
       const top2 = localStorage.getItem("top2");
-      const key = [top1, top2].sort().join("_");
+      const key = `${top1}_${top2}`; // 並べ替えない
 
       $("#top-image").attr("src", `../img/results/${key}.jpg`);
 
@@ -509,6 +514,7 @@
         taiken: Number(localStorage.getItem("taiken")) || 0,
         chosen: Number(localStorage.getItem("chosen")) || 0,
       };
+      const displayOrder = [top1, top2].sort((a, b) => scores[b] - scores[a]);
 
       const typeColors = {
         kyomei: "#FFA94D",
@@ -531,6 +537,8 @@
       console.log(localStorage.getItem("taiken"));
       console.log(localStorage.getItem("chosen"));
 
+      Chart.register(ChartDataLabels);
+
       const ctx = document.getElementById("result-chart").getContext("2d");
       const chart = new Chart(ctx, {
         type: "radar",
@@ -548,6 +556,7 @@
               backgroundColor: "rgba(255, 255, 255, 0.3)",
               borderColor: "#fff",
               pointBackgroundColor: "#fff",
+              borderWidth: 2,
             },
           ],
         },
@@ -556,27 +565,39 @@
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              display: false, // ← これで凡例非表示
+              display: false,
+            },
+            datalabels: {
+              color: "#fff",
+              font: {
+                weight: "bold",
+                size: 14,
+              },
+              anchor: "end", // ← 点の外側に寄せる
+              align: "bottom", // ← 外向きに表示
+              offset: 10,
+              formatter: function (value) {
+                return value + "点";
+              },
             },
           },
           scales: {
             r: {
               min: 0,
-              max: 20, // ←ここで最大値を指定！
+              max: 30,
               ticks: {
-                stepSize: 5, // 任意（5刻みなど）
-                backdropColor: "transparent", // 背景を透明にする（見栄え調整用）
+                stepSize: 5,
+                backdropColor: "transparent",
               },
               pointLabels: {
                 font: {
-                  size: 14,
+                  size: 20,
                 },
               },
               grid: {
                 circular: false,
                 color: function (ctx) {
-                  // ctx.index: グリッドの位置インデックス（0 = min, 1 = 5, ..., 4 = 20）
-                  return ctx.index === 4 ? "#FFD700" : "rgba(255,255,255,0.2)";
+                  return ctx.index === 6 ? "#FFD700" : "rgba(255,255,255,0.2)";
                 },
               },
             },
@@ -602,15 +623,17 @@
 
       if (data) {
         $("#main-type").html(
-          `あなたの「ビジョンの源泉」は──<br>  <span style="color: ${
-            typeColors[types[0]]
+          `あなたの「ビジョンの源泉」は<br>
+          <span style="color: ${
+            typeColors[displayOrder[0]]
           }; font-weight: bold;">
-                      ${typeLabels[types[0]]}</span>  ×
-                    <span style="color: ${
-                      typeColors[types[1]]
-                    }; font-weight: bold;">
-                      ${typeLabels[types[1]]}
-                    </span>`
+            ${typeLabels[displayOrder[0]]}
+          </span> × 
+          <span style="color: ${
+            typeColors[displayOrder[1]]
+          }; font-weight: bold;">
+            ${typeLabels[displayOrder[1]]}
+          </span>`
         );
 
         $("#description").html(data.description);
