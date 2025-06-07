@@ -443,35 +443,5 @@
         }
       });
     </script>
-    <script>
-      (function () {
-        const bgEl = document.getElementById("bg");
-        const secs = document.querySelectorAll("section.bg");
-
-        function updateBg() {
-          const mid = window.innerHeight / 2;
-          let closest = secs[0],
-            minD = Infinity;
-          secs.forEach((s) => {
-            const r = s.getBoundingClientRect();
-            const d = Math.abs((r.top + r.bottom) / 2 - mid);
-            if (d < minD) {
-              minD = d;
-              closest = s;
-            }
-          });
-          const isSp = window.innerWidth <= 768;
-          const url =
-            isSp && closest.dataset.bgSp
-              ? closest.dataset.bgSp
-              : closest.dataset.bg;
-          bgEl.style.backgroundImage = `url('${url}')`;
-        }
-
-        window.addEventListener("scroll", updateBg);
-        window.addEventListener("resize", updateBg);
-        updateBg();
-      })();
-    </script>
   </body>
 </html>
